@@ -39,10 +39,10 @@ const ProductList = ({ products = [] }) => {
                                         <DialogHeader>
                                             <DialogTitle>Product Details</DialogTitle>
                                         </DialogHeader>
-                                        <DialogDescription>
-                                            <div>
+                                        <DialogDescription asChild>
+                                            {/* <div> */}
                                                 <ProductDetails product={product} />
-                                            </div>
+                                            {/* </div> */}
                                         </DialogDescription>
                                     </DialogContent>
                                 </Dialog>

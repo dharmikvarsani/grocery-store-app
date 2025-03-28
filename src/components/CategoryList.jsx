@@ -20,7 +20,7 @@ const CategoryList = () => {
         categorieList();
     }, []);
 
-    if (loading) return null; // Hide component until loaded
+    if (loading) return null; 
 
     return (
         <div className="flex flex-col gap-8 font-bold text-2xl">

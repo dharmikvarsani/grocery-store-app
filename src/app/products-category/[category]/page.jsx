@@ -3,13 +3,13 @@ import { getProductByCategory, getCategory } from "@/utils/globleApi";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ProductList from "@/components/productList";
-import { useParams } from "next/navigation"; // ✅ Import useParams
+import { useParams } from "next/navigation";
 
 const ProductCategory = () => {
-    const params = useParams(); // ✅ Unwrap params properly
+    const params = useParams(); 
     const [productList, setProductList] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState(params.category); // ✅ Use params.category safely
+    const [selectedCategory, setSelectedCategory] = useState(params.category); 
 
     useEffect(() => {
         if (selectedCategory) {
