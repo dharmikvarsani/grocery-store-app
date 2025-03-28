@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { addCart } from "@/utils/globleApi";
-import { LoaderCircle, LoaderIcon } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import { UpdateCartContext } from "@/app/context/cartContext";
 
 const ProductDetails = ({ product }) => {
@@ -22,30 +22,6 @@ const ProductDetails = ({ product }) => {
     return <p>No Product Data Available</p>;
   }
 
-  // const addToCart = async () => {
-  //   if (!jwt) {
-  //     router.push('login');
-  //     return;
-  //   }
-
-  //   const data = {
-  //     data: {
-  //       quantity: quantity,
-  //       amount: (quantity * productTotalPrice).toFixed(2),
-  //       products: product,
-  //       users_permissions_users: user?.id
-  //     }
-  //   }
-
-  //   try {
-  //     const res = await addCart(data, jwt);
-  //     console.log(res.data)
-  //     toast.success("Added to cart")
-  //   } catch (error) {
-  //     console.log("Error In Add To Cart", error)
-  //     toast.error("Error while adding into cart")
-  //   }
-  // }
 
   const addToCart = async () => {
     setLoading(true)
@@ -67,9 +43,7 @@ const ProductDetails = ({ product }) => {
     };
 
     try {
-      // console.log("Sending Data:", JSON.stringify(data, null, 2));  
       const res = await addCart(data, jwt);
-      // console.log("Response:", res);
       toast.success("Added to cart");
       setUpdateCart(!updateCart);
       setLoading(false);

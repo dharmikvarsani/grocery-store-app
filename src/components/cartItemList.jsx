@@ -1,7 +1,6 @@
 "use client"
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import { Button } from './ui/button';
+import React from 'react';
 import { TrashIcon } from 'lucide-react';
 
 const CartItemList = ({ cartItemList = [], handleItemDelete }) => {

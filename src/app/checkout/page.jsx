@@ -1,11 +1,9 @@
 'use client'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {  createOrder, deleteCartItem, getCartProduct } from '@/utils/globleApi';
 import { PayPalButtons } from '@paypal/react-paypal-js';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-import { FaArrowRightLong } from "react-icons/fa6";
 import { toast } from 'sonner';
 
 const CheckOut = () => {
@@ -44,8 +42,6 @@ const CheckOut = () => {
 
         try {
             const res = await getCartProduct(user.id, jwt);
-            // console.log("Cart Response:", JSON.stringify(res, null, 2)); 
-
             if (Array.isArray(res)) {
                 setProductCount(res.length);
                 setCartItemList(res);
@@ -71,8 +67,6 @@ const CheckOut = () => {
 
 
     const onApprove = async (data) => {
-        console.log("PayPal Approval Data:", data);
-    
         const payload = {
             data: {
                 paymentId: data.paymentId?.toString() || "N/A",
@@ -91,16 +85,11 @@ const CheckOut = () => {
             }
         };
         
-        console.log("Sending Payload:", JSON.stringify(payload, null, 2));
-    
         try {
             const res = await createOrder(payload, jwt);
-            console.log("Order Response:", res.data);
-            
             await Promise.all(cartItemList.map(async (item) => {
                 await deleteCartItem(item.id, jwt);
             }));
-    
             setCartItemList([]);
             setProductCount(0);
             setSubTotal(0);
@@ -143,7 +132,6 @@ const CheckOut = () => {
                         <h2 className='flex justify-between'>Tax (7%): <span>₹{(subTotal * 0.07).toFixed(2)}</span></h2>
                         <hr />
                         <h2 className='flex justify-between font-bold'>Total: <span>₹{totalAmount()}</span></h2>
-                        {/* <Button onClick={() => onApprove({ paymentId: 123456 })} className='bg-[#3bb77e] hover:bg-[#3a6451] text-white font-bold text-md flex flex-row  items-center'>Payment <FaArrowRightLong /> </Button> */}
                         <PayPalButtons style={{ layout: "horizontal" }}
                             disabled={!(username, email, zip, address)}
                             onApprove={onApprove}

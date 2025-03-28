@@ -34,11 +34,7 @@ import { toast } from 'sonner';
 const Header = () => {
 
     const [categories, setCategories] = useState([])
-    // const isLogin = sessionStorage.getItem("token") ? true : false
     const [productCount, setProductCount] = useState(0)
-    // const user = JSON.parse(sessionStorage.getItem('user'))
-    // const jwt = sessionStorage.getItem('token')
-    // const { updateCart, setUpdateCart } = useContext(UpdateCartContext)
     const [cartItemList, setCartItemList] = useState([])
     const [subTotal, setSubTotal] = useState(0)
     const router = useRouter()
@@ -59,7 +55,6 @@ const Header = () => {
 
     const categorieList = async () => {
         const res = await getCategory()
-        // console.log('Categories', res)
         if (res && res.data) {
             setCategories(res.data)
         }
@@ -81,33 +76,12 @@ const Header = () => {
         router.push("/login");
     };
 
-  
-
-    // const getCartItem = async () => {
-    //     if (!user?.id || !jwt) return;
-
-    //     try {
-    //         const res = await getCartProduct(user.id, jwt);
-    //         console.log("Cart Response:", res);
-    //         if (res?.data) {
-    //             setProductCount(res.data.length);
-    //         } else {
-    //             setProductCount(0);
-    //         }
-    //         setCartItemList(res)
-    //     } catch (error) {
-    //         console.error("Error fetching cart items:", error);
-    //         setProductCount(0);
-    //     }
-    // };
 
     const getCartItem = async () => {
         if (!user?.id || !jwt) return;
 
         try {
             const res = await getCartProduct(user.id, jwt);
-            // console.log("Cart Response:", JSON.stringify(res, null, 2)); 
-
             if (Array.isArray(res)) {
                 setProductCount(res.length);
                 setCartItemList(res);
@@ -122,12 +96,11 @@ const Header = () => {
     };
 
     const handleItemDelete = async (id) => {
-        console.log("Attempting to delete item with ID:", id);
         try {
             const success = await deleteCartItem(id, jwt);
             if (success) {
                 toast.success("Item deleted!");
-                setCartItemList(cartItemList.filter(item => item.id !== id)); // Update state
+                setCartItemList(cartItemList.filter(item => item.id !== id)); 
                 setProductCount(prevCount => prevCount - 1);
             } else {
                 toast.error("Failed to delete item!");

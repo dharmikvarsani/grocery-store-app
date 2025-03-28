@@ -9,7 +9,6 @@ import { DialogDescription } from '@radix-ui/react-dialog';
 const ProductList = ({ products = [] }) => {
     return (
         <div className='flex flex-col gap-10'>
-            {/* <h1 className='font-bold text-2xl text-green-400'>Our Popular Products</h1> */}
             <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8.5 gap-y-8">
                 {products.length > 0 ? (
                     products.map((product) => (
