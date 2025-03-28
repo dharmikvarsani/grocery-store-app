@@ -10,7 +10,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "grocery-store-admin.up.railway.app", 
+        hostname: "https://grocery-store-admin.up.railway.app", 
         pathname: "/uploads/**",
       },
     ],
