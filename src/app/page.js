@@ -10,10 +10,9 @@ const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate a delay (or wait for API data)
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 8000); // Adjust time as needed
+    }, 10000); 
 
     return () => clearTimeout(timer);
   }, []);

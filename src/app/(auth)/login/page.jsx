@@ -11,6 +11,7 @@ const Login = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [loader, setLoader] = useState()
+    const [showPassword, setShowPassword] = useState(false);
     const router = useRouter()
 
     useEffect(() => {
@@ -75,11 +76,11 @@ const Login = () => {
                                     required=""
                                     placeholder="Password"
                                     className="form-input"
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     name='password'
                                     onChange={(e) => setPassword(e.target.value)}
-                                />
-                                <button className="password-toggle" type="button">
+                                /> 
+                                <button className="password-toggle" type="button"  onClick={() => setShowPassword(!showPassword)}>
                                     <svg fill="none" viewBox="0 0 24 24" className="eye-icon">
                                         <path
                                             strokeWidth="1.5"
