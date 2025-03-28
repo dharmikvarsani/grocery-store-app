@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-    baseURL: "http://localhost:1337/api"
+    baseURL: "grocery-store-admin.up.railway.app/api"
 })
 
 export const getCategory = async () => {
