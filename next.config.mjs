@@ -4,8 +4,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "freshkart-admin.onrender.com", 
-        pathname: "/uploads/**",
+        hostname: "res.cloudinary.com",
+        pathname: "/drhlytkto/**",
       },
     ],
   },
