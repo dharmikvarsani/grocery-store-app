@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-    baseURL: "https://grocery-store-admin.up.railway.app/api"
+    baseURL: "https://freshkart-admin.onrender.com/api"
 })
 
 export const getCategory = async () => {
