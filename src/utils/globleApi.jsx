@@ -100,9 +100,7 @@ export const getCartProduct = async (userId, jwt) => {
                 name: product?.name || "Unknown",
                 quantity: item?.quantity || 1,
                 amount: item?.amount || 0,
-                image: imageUrl
-                    ? `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${imageUrl}`
-                    : "",
+                image:  imageUrl.startsWith("http") ? imageUrl : `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${imageUrl}`,
                 actualPrice: product?.sellingPrice || 0,
                 id: item.id,
                 product: product?.id,

@@ -100,7 +100,7 @@ const Header = () => {
             const success = await deleteCartItem(id, jwt);
             if (success) {
                 toast.success("Item deleted!");
-                setCartItemList(cartItemList.filter(item => item.id !== id)); 
+                setCartItemList(cartItemList.filter(item => item.id !== id));
                 setProductCount(prevCount => prevCount - 1);
             } else {
                 toast.error("Failed to delete item!");
@@ -141,9 +141,22 @@ const Header = () => {
                             categories.length > 0 ? (
                                 categories.map((categorie) => (
                                     <DropdownMenuItem key={categorie.id} className='cursor-pointer flex flex-row gap-2 items-center' >
-                                        <Image src={
-                                            process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
-                                            categorie?.icon[0]?.url} alt={categorie?.name} width={34} height={34} unoptimized />
+                                        <Image
+                                            // src={
+                                            //     process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+                                            //     categorie?.icon[0]?.url} alt={categorie?.name} width={34} height={34} unoptimized 
+                                            src={
+                                                categorie?.icon && Array.isArray(categorie.icon) && categorie.icon.length > 0
+                                                    ? (categorie.icon[0].url.startsWith("http")
+                                                        ? categorie.icon[0].url
+                                                        : `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${categorie.icon[0].url}`)
+                                                    : "/fallback-image.png"
+                                            }
+                                            alt={categories?.name || "Category Image"}
+                                            width={34}
+                                            height={34}
+                                            unoptimized
+                                        />
                                         <h2 className='font-semibold' >{categorie?.name}</h2>
                                     </DropdownMenuItem>
                                 ))

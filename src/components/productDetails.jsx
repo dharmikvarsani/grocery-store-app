@@ -37,8 +37,7 @@ const ProductDetails = ({ product }) => {
         amount: (quantity * productTotalPrice).toFixed(2),
         products: product.id,
         users_permissions_users: user.id,
-        userId: user.id
-
+        userId: user.id,
       }
     };
 
@@ -59,7 +58,12 @@ const ProductDetails = ({ product }) => {
   return (
     <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2 sm:p-7 p-5 bg-white text-black">
       <Image
-        src={process.env.NEXT_PUBLIC_BACKEND_BASE_URL + product.image?.url}
+        // src={process.env.NEXT_PUBLIC_BACKEND_BASE_URL + product.image?.url}
+        src={
+          product?.image?.url?.startsWith("http")
+          ? product.image.url
+          : `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${product.image?.url || ""}`
+      }
         alt={product.name} width={200} height={230} unoptimized
         className=" sm:w-[200px] sm:h-[230px] w-[150px] h-[130px] flex  p-2 shadow-lg bg-slate-200 rounded-lg object-contain"
       />

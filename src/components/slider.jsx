@@ -11,7 +11,7 @@ import {
 
 const Slider = () => {
     const [slider, setSlider] = useState([]);
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchSliders = async () => {
@@ -19,13 +19,13 @@ const Slider = () => {
             if (res && res.data) {
                 setSlider(res.data);
             }
-            setLoading(false); 
+            setLoading(false);
         };
 
         fetchSliders();
     }, []);
 
-    if (loading) return null; 
+    if (loading) return null;
 
     return (
         <div className="w-screen h-[200px] md:h-[500px] overflow-hidden">
@@ -35,9 +35,10 @@ const Slider = () => {
                         <CarouselItem key={sliders.id} className="w-full h-[500px]">
                             <div className="relative w-full h-full">
                                 <img
-                                    src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${sliders?.image[0]?.url}`}
+                                    // src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${sliders?.image[0]?.url}`}
+                                    src={sliders?.image[0]?.url.startsWith("http") ? sliders.image[0].url : `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${sliders?.image[0]?.url}`}
                                     alt="Slider"
-                                    layout="fill" 
+                                    layout="fill"
                                     objectfit="fill"
                                 />
                             </div>

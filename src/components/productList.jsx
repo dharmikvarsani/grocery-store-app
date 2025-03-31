@@ -14,7 +14,12 @@ const ProductList = ({ products = [] }) => {
                     products.map((product) => (
                         <div key={product.id} className='bg-white shadow-lg xl:w-[280px] w-[230px] h-auto py-5 flex flex-col xl:gap-5 gap-2 justify-center items-center rounded-lg border-1 border-zinc-300 hover:scale-110 hover:shadow-md transition-all ease-in-out'>
                             <Image
-                                src={process.env.NEXT_PUBLIC_BACKEND_BASE_URL + product?.image?.url}
+                                // src={process.env.NEXT_PUBLIC_BACKEND_BASE_URL + product?.image?.url}
+                                src={
+                                    product?.image?.url?.startsWith("http")
+                                        ? product.image.url  // ✅ Use Cloudinary URL directly
+                                        : `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${product.image?.url || ""}`
+                                }
                                 alt={product.name}
                                 width={200}
                                 height={190}
@@ -41,7 +46,7 @@ const ProductList = ({ products = [] }) => {
                                         </DialogHeader>
                                         <DialogDescription asChild>
                                             {/* <div> */}
-                                                <ProductDetails product={product} />
+                                            <ProductDetails product={product} />
                                             {/* </div> */}
                                         </DialogDescription>
                                     </DialogContent>

@@ -20,7 +20,7 @@ const CategoryList = () => {
         categorieList();
     }, []);
 
-    if (loading) return null; 
+    if (loading) return null;
 
     return (
         <div className="flex flex-col gap-8 font-bold text-2xl">
@@ -29,7 +29,14 @@ const CategoryList = () => {
                 {categorie.map((categories) => (
                     <Link href={"/products-category/" + categories.name} key={categories.id} className="bg-green-200 flex justify-center items-center flex-col gap-3 w-[120px] p-3 rounded-lg">
                         <Image
-                            src={process.env.NEXT_PUBLIC_BACKEND_BASE_URL + categories?.icon[0]?.url}
+                            // src={process.env.NEXT_PUBLIC_BACKEND_BASE_URL + categories?.icon[0]?.url}
+                            src={
+                                categories?.icon && Array.isArray(categories.icon) && categories.icon.length > 0 && categories.icon[0]?.url
+                                    ? (categories.icon[0].url.startsWith("http")
+                                        ? categories.icon[0].url
+                                        : `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${categories.icon[0].url}`)
+                                    : "/fallback-image.png"  
+                            }
                             alt={categories?.name}
                             width={50}
                             height={50}
