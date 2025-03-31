@@ -8,10 +8,15 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay"
 
 const Slider = () => {
     const [slider, setSlider] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const plugin = React.useRef(
+        Autoplay({ delay: 2000, stopOnInteraction: false })
+      )
 
     useEffect(() => {
         const fetchSliders = async () => {
@@ -29,7 +34,7 @@ const Slider = () => {
 
     return (
         <div className="w-screen h-[200px] md:h-[500px] overflow-hidden">
-            <Carousel className="w-full h-full">
+            <Carousel className="w-full h-full"  plugins={[plugin.current]} opts={{ loop: true }}>
                 <CarouselContent className="flex">
                     {slider.map((sliders) => (
                         <CarouselItem key={sliders.id} className="w-full h-[500px]">
